@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+
+RUN apt clean && apt update && apt upgrade -y
+
+RUN apt install -y build-essential cmake
+
+COPY ./code /home/code
+
+WORKDIR /home/code
+RUN chmod u+x ./init.sh
+
+# If you build any code using cmake, create a folder for build and execute build in the folder
+RUN mkdir build
+
+CMD [ "/home/code/init.sh" ]

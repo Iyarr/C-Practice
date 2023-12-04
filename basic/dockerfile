@@ -1,0 +1,17 @@
+FROM ubuntu:latest
+
+RUN apt clean && apt update && apt upgrade -y
+
+RUN apt install -y build-essential
+
+COPY ./code /home/code
+
+WORKDIR /home/code
+
+# create object file
+RUN g++ -c main.cpp hello.cpp
+
+# link some objectfile and create execusion file
+RUN g++ -o a.out main.o hello.o
+
+CMD [ "./a.out" ]
